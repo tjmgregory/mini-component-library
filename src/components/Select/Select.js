@@ -1,13 +1,12 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import styled from 'styled-components';
 
 import {COLORS} from '../../constants';
 import Icon from '../Icon';
 import {getDisplayedValue} from './Select.helpers';
 
-const StyledSelect = styled.select`
+const Wrapper = styled.div`
   background-color: ${COLORS.transparentGray15};
-  border: none;
   border-radius: 8px;
   padding: 12px 16px;
   color: ${COLORS.gray700};
@@ -21,13 +20,33 @@ const StyledSelect = styled.select`
   }
 `
 
+
+const StyledSelect = styled.select`
+  background-color: hsla(0 0% 0% / 0%);
+  border: none;
+
+  &:focus {
+    border: 0px solid;
+  }
+
+  &:hover {
+    // color: ${COLORS.black};
+  }
+`
+
 const Select = ({label, value, onChange, children}) => {
   const displayedValue = getDisplayedValue(value, children);
+  const selectRef = useRef()
+  const onWrapperClick = () => {
+    selectRef.current.focus()
+  }
 
   return (
-    <StyledSelect value={value} onChange={onChange}>
-      {children}
-    </StyledSelect>
+    <Wrapper onClick={onWrapperClick}>
+      <StyledSelect ref={selectRef} value={value} onChange={onChange}>
+        {children}
+      </StyledSelect>
+    </Wrapper>
   );
 };
 
