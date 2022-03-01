@@ -7,10 +7,13 @@ import UnstyledIcon from "../Icon";
 import VisuallyHidden from "../VisuallyHidden";
 
 const Wrapper = styled.div`
-  border-bottom: var(--borderWidth) solid #000000;
-  width: var(--width);
   display: flex;
   gap: 8px;
+
+  border-bottom: var(--borderWidth) solid #000000;
+  width: var(--width);
+  font-size: var(--fontSize);
+
   color: ${COLORS.gray700};
 
   &:hover {
@@ -31,27 +34,32 @@ const Icon = styled(UnstyledIcon)`
 const Input = styled.input`
   border: none;
   outline: none;
-  margin-block: 4px;
+  line-height: 1.5;
   color: inherit;
+  font-size: inherit;
 `;
 
 const IconInput = ({ label, icon, width = 250, size, placeholder }) => {
   const style = {
     small: {
       strokeWidth: 1,
-      iconSize: 10,
+      iconSize: 16,
+      fontSize: 14,
     },
     large: {
       strokeWidth: 2,
-      iconSize: 16,
+      iconSize: 24,
+      fontSize: 18,
     },
   }[size];
+  console.log("theo-2026", JSON.stringify({ style }, null, 2));
 
   return (
     <Wrapper
       style={{
         "--borderWidth": style.strokeWidth + "px",
         "--width": width + "px",
+        "--fontSize": style.fontSize + "px",
       }}
     >
       <Icon
@@ -61,7 +69,7 @@ const IconInput = ({ label, icon, width = 250, size, placeholder }) => {
         onClick={() => {}}
       />
       <Input placeholder={placeholder} />
-      <VisuallyHidden>Search input</VisuallyHidden>
+      <VisuallyHidden>{label}</VisuallyHidden>
     </Wrapper>
   );
 };
