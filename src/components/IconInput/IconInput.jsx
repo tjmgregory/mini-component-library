@@ -6,6 +6,10 @@ import { COLORS } from "../../constants";
 import UnstyledIcon from "../Icon";
 import VisuallyHidden from "../VisuallyHidden";
 
+// Alternative to this approach is to make the input the whole size, and
+// then absolute the image over the top and put some padding on the left
+// hand side to ensure it's not hidden by the icon.
+
 const Wrapper = styled.div`
   display: flex;
   gap: 8px;
@@ -52,7 +56,6 @@ const IconInput = ({ label, icon, width = 250, size, placeholder }) => {
       fontSize: 18,
     },
   }[size];
-  console.log("theo-2026", JSON.stringify({ style }, null, 2));
 
   return (
     <Wrapper
